@@ -6,5 +6,5 @@ PREFIX='/opt/posthog'
 
 mkdir -p "$PREFIX"
 cd "$PREFIX"
-$DIR/deploy-hobby 'latest' "$(hostname)"
+$DIR/deploy-hobby 'latest' "$(ec2-metadata -p | cut -d' ' -f2)"
 
