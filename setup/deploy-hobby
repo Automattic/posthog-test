@@ -62,15 +62,6 @@ echo "Ok! We'll take it from here 🚀"
 echo "Making sure any stack that might exist is stopped"
 sudo -E docker-compose -f docker-compose.yml stop &> /dev/null || true
 
-# send log of this install for continued support!
-curl -o /dev/null -L --header "Content-Type: application/json" -d "{
-    \"api_key\": \"sTMFPsFhdP1Ssg\",
-    \"distinct_id\": \"${DOMAIN}\",
-    \"properties\": {\"domain\": \"${DOMAIN}\"},
-    \"type\": \"capture\",
-    \"event\": \"magic_curl_install_start\"
-}" https://us.i.posthog.com/batch/ &> /dev/null
-
 # update apt cache
 echo "Grabbing latest apt caches"
 sudo apt update
@@ -234,14 +225,6 @@ if bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost/_heal
     echo "⌛️ PostHog looks up!"
     echo ""
     echo "🎉🎉🎉  Done! 🎉🎉🎉"
-    # send log of this install for continued support!
-    curl -o /dev/null -L --header "Content-Type: application/json" -d "{
-        \"api_key\": \"sTMFPsFhdP1Ssg\",
-        \"distinct_id\": \"${DOMAIN}\",
-        \"properties\": {\"domain\": \"${DOMAIN}\"},
-        \"type\": \"capture\",
-        \"event\": \"magic_curl_install_complete\"
-    }" https://us.i.posthog.com/batch/ &> /dev/null
 else
     echo "Failed to detect PostHog web boot. Please check the logs with 'docker-compose logs' for more details."
 fi
