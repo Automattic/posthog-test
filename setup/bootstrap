@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+DIR="$(dirname "$(realpath "$0")")"
+PREFIX='/opt/posthog'
+
+mkdir -p "$PREFIX"
+cd "$PREFIX"
+$DIR/deploy-hobby 'ee5e89c42430f7f993a2ac3736981822056d17a5' "$(hostname)"
+
