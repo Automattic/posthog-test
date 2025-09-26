@@ -23,5 +23,7 @@ PREFIX='/opt/posthog'
 
 mkdir -p "$PREFIX"
 cd "$PREFIX"
+
+export TLS_BLOCK='local_certs'
 $DIR/deploy-hobby 'latest' "$(ec2-metadata -p | cut -d' ' -f2)"
 
